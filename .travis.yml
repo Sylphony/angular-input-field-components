@@ -5,6 +5,8 @@ before_script:
     - yarn install
 notifications:
     email: false
+script: 
+    - npm run test:single-run
 cache:
     yarn:
         - yarn
