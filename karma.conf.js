@@ -2,7 +2,7 @@
 // Generated on Tue Mar 07 2017 03:41:10 GMT-0800 (Pacific Standard Time)
 
 module.exports = function(config) {
-  config.set({
+  var configObj = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -15,7 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.spec.js'
+      // 'node_modules/angular/angular.js',
+      'src/index.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'src/**/*.html',
+      'src/**/*.js'
     ],
 
 
@@ -23,10 +27,12 @@ module.exports = function(config) {
     exclude: [
     ],
 
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'src/index.js': ['webpack'],
+        'src/**/*.js': ['webpack'],
+        'src/**/*.html': ['ng-html2js']
     },
 
 
@@ -55,7 +61,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome', 'PhantomJS'],
 
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
@@ -63,16 +69,15 @@ module.exports = function(config) {
     },
 
     webpack: {
-      cache: true,
       module: {
         rules: [
           { 
-              test: /\.js?$/,
-              loader: "babel-loader",
-              exclude: /node_modules/,
-              query: {
-                  presets: ["es2015"],
-              }
+            test: /\.js?$/,
+            loader: "babel-loader",
+            exclude: /node_modules/,
+            query: {
+                presets: ["es2015"]
+            }
           }
         ]
       }
@@ -82,6 +87,12 @@ module.exports = function(config) {
       stats: 'errors-only'
     },
 
+    // To be able to load the templates given at templateUrls
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'src/',
+      moduleName: 'templates'
+    },
+
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
@@ -89,5 +100,12 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
-}
+  };
+
+  // For CI: If the --single-run flag is set, use PhantomJS only
+  if (config.singleRun) {
+    configObj.browsers = ["PhantomJS"];
+  }
+
+  config.set(configObj);
+};
