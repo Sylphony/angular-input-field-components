@@ -20,6 +20,6 @@ export default {
     },
 
     templateUrl: ["$element", "$attrs", function($element, $attrs) {
-        return "./field-" + $attrs.type + ".html";
+        return "field-" + $attrs.type + ".html";
     }]
 };
