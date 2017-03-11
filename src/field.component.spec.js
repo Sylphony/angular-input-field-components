@@ -9,35 +9,51 @@ function compileElement($compile, $scope, element) {
 }
 
 
-
-describe("Field Components Test", function() {
-    let component = {}, $scope;
+/**
+ * The tests.
+ */
+describe("Field Components", function() {
+    let $compile, $scope;
 
     beforeEach(angular.mock.module("inputFieldComponents"));
     beforeEach(angular.mock.module("templates"));
 
-    beforeEach(angular.mock.inject(function($rootScope, $compile) {
+    beforeEach(angular.mock.inject(($rootScope, _$compile_) => {
         $scope = $rootScope.$new();
-        
-        component.text = compileElement(
-            $compile, 
-            $scope, 
-            angular.element(
-                `
-                <field type="text" 
-                       placeholder="placeholder"
-                       blockClass="form">
-                </field>
-                `
-            )
-        );
+        $compile = _$compile_;
     }));
 
-    it("should contain a label element immediately as the child", function() {
-        for (let fieldType in component) {
-            const labelEle = component[fieldType].children();
+    // Text field tests
+    describe("<field type='text'>", function() {
+        let component;
+
+        beforeEach(() => {
+            component = compileElement(
+                $compile,
+                $scope,
+                angular.element(
+                    `
+                    <field type="text" 
+                           placeholder="placeholder"
+                           block-class="form">
+                    </field>
+                    `
+                )
+            );
+        });
+
+        it("should contain a <label> immediately as the child", () => {
+            const labelEle = component.children();
 
             expect(labelEle[0].nodeName).toBe("LABEL");
-        }
+        });
+
+        it("should contain only one input element and it is <input type='text'>", () => {
+            const inputEle = component.find('input');
+
+            expect(inputEle.length).toBe(1);
+            expect(inputEle[0].type).toBe("text");
+        });
     });
+
 });
