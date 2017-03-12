@@ -1,6 +1,8 @@
 <label class="{{ ::$ctrl.blockClass }}__field {{ ::$ctrl.blockClass }}__field--text" ng-class="{{ $ctrl.customClass.label }}">
     <span class="{{ ::$ctrl.blockClass }}__field-title" 
-          ng-class="{{ $ctrl.customClass.title }}">{{ ::$ctrl.title }}
+          ng-class="{{ $ctrl.customClass.title }}"
+          data-title="{{ ::$ctrl.title }}">
+        {{ ::$ctrl.title }}
     </span>
 
     <input class="{{ ::$ctrl.blockClass }}__field-input"
