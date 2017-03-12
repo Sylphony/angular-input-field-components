@@ -3,10 +3,11 @@
  */
 export default {
     bindings: {
-        blockClass: "@",
-        customClass: "<",
         title: "@",
         placeholder: "@",
+        maxlength: "@",
+        blockClass: "@",
+        customClass: "<",
         model: "=?",
         disabled: "<",
         options: "<",
@@ -16,7 +17,8 @@ export default {
         change: "&",
         keypress: "&",
         keydown: "&",
-        keyup: "&"
+        keyup: "&",
+        mouseover: "&"
     },
 
     templateUrl: ["$element", "$attrs", function($element, $attrs) {

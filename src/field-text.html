@@ -6,10 +6,15 @@
     <input class="{{ ::$ctrl.blockClass }}__field-input"
            type="text" 
            placeholder="{{ $ctrl.placeholder }}"
+           maxlength="{{ $ctrl.maxlength }}"
            ng-class="{{ $ctrl.customClass.input }}"
            ng-model="$ctrl.model" 
            ng-disabled="$ctrl.disabled"
            ng-click="$ctrl.click()"
            ng-focus="$ctrl.focus()"
-           ng-blur="$ctrl.blur()">
+           ng-blur="$ctrl.blur()"
+           ng-keypress="$ctrl.keypress()"
+           ng-keydown="$ctrl.keydown()"
+           ng-keyup="$ctrl.keyup()"
+           ng-mouseover="$ctrl.mouseover()">
 </label>
