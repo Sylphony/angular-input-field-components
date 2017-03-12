@@ -13,7 +13,7 @@ function compileElement($compile, $scope, element) {
  * The tests.
  */
 describe("Field Components", function() {
-    let $compile, $scope;
+    let $compile, $scope, $rootScope;
 
     beforeEach(angular.mock.module("inputFieldComponents"));
     beforeEach(angular.mock.module("templates"));
@@ -30,14 +30,23 @@ describe("Field Components", function() {
         let component;
 
         beforeEach(() => {
+            // Create spy mockups to use for events
+            $scope.mockClick = jasmine.createSpy("mockClick");
+            $scope.mockBlur = jasmine.createSpy("mockBlur");
+            $scope.mockKeypress = jasmine.createSpy("mockKeypress");
+
             component = compileElement(
                 $compile,
                 $scope,
                 angular.element(
                     `
-                    <field type="text" 
+                    <field type="text"
+                           title="Title here"
                            placeholder="placeholder"
-                           block-class="form">
+                           block-class="form"
+                           click="mockClick()"
+                           blur="mockBlur()"
+                           keypress="mockKeypress()">
                     </field>
                     `
                 )
@@ -80,6 +89,12 @@ describe("Field Components", function() {
                 expect(titleEle[0].hasAttribute("class")).toBe(true);
                 expect(titleEle[0].hasAttribute("ng-class")).toBe(true);
             });
+
+            it("should have the binded title", () => {
+                const titleEle = component.find("span");
+
+                expect(titleEle.attr("data-title")).toBe("Title here");
+            });
         });
 
         describe("<input type='text'>", function() {
@@ -100,6 +115,27 @@ describe("Field Components", function() {
                 expect(inputEle[0].hasAttribute("ng-keyup")).toBe(true);
                 expect(inputEle[0].hasAttribute("ng-mouseover")).toBe(true);
                 expect(inputEle[0].hasAttribute("ng-disabled")).toBe(true);
+            });
+
+            it("should trigger correctly on click", () => {
+                const inputEle = component.find("input");
+
+                inputEle.triggerHandler("click");
+                expect($scope.mockClick).toHaveBeenCalled();
+            });
+
+            it("should trigger correctly on blur", () => {
+                const inputEle = component.find("input");
+
+                inputEle.triggerHandler("blur");
+                expect($scope.mockBlur).toHaveBeenCalled();
+            });
+
+            it("should trigger correctly on keypress", () => {
+                const inputEle = component.find("input");
+
+                inputEle.triggerHandler("keypress");
+                expect($scope.mockKeypress).toHaveBeenCalled();
             });
         });
     });
