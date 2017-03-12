@@ -89,7 +89,6 @@ describe("Field Components", function() {
                 expect(inputEle[0].hasAttribute("type")).toBe(true);
                 expect(inputEle[0].hasAttribute("class")).toBe(true);
                 expect(inputEle[0].hasAttribute("placeholder")).toBe(true);
-                expect(inputEle[0].hasAttribute("value")).toBe(true);
                 expect(inputEle[0].hasAttribute("maxlength")).toBe(true);
                 expect(inputEle[0].hasAttribute("ng-class")).toBe(true);
                 expect(inputEle[0].hasAttribute("ng-model")).toBe(true);
