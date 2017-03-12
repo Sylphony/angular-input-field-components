@@ -5,7 +5,8 @@ before_script:
     - yarn install
 notifications:
     email: false
-script: 
+script:
+    - npm run eslint
     - npm run test:single-run
 cache:
     yarn:

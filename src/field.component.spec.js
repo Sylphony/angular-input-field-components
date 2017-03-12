@@ -13,7 +13,7 @@ function compileElement($compile, $scope, element) {
  * The tests.
  */
 describe("Field Components", function() {
-    let $compile, $scope, $rootScope;
+    let $compile, $scope;
 
     beforeEach(angular.mock.module("inputFieldComponents"));
     beforeEach(angular.mock.module("templates"));
