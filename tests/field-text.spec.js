@@ -16,9 +16,15 @@ describe("<field type='text'>", function() {
 
     beforeEach(() => {
         // Create spy mockups to use for events
-        $scope.mockClick = jasmine.createSpy("mockClick");
-        $scope.mockBlur = jasmine.createSpy("mockBlur");
-        $scope.mockKeypress = jasmine.createSpy("mockKeypress");
+        $scope.mockEvents = jasmine.createSpyObj("mockEvents", [
+            "click",
+            "focus",
+            "blur",
+            "keypress",
+            "keydown",
+            "keyup",
+            "mouseover"
+        ]);
 
         component = compileElement(
             $compile,
@@ -29,9 +35,13 @@ describe("<field type='text'>", function() {
                        title="Title here"
                        placeholder="placeholder"
                        block-class="form"
-                       click="mockClick()"
-                       blur="mockBlur()"
-                       keypress="mockKeypress()">
+                       click="mockEvents.click()"
+                       focus="mockEvents.focus()"
+                       blur="mockEvents.blur()"
+                       keypress="mockEvents.keypress()"
+                       keydown="mockEvents.keydown()"
+                       keyup="mockEvents.keyup()"
+                       mouseover="mockEvents.mouseover()">
                 </field>
                 `
             )
@@ -106,21 +116,49 @@ describe("<field type='text'>", function() {
             const inputEle = component.find("input");
 
             inputEle.triggerHandler("click");
-            expect($scope.mockClick).toHaveBeenCalled();
+            expect($scope.mockEvents.click).toHaveBeenCalled();
+        });
+
+        it("should trigger correctly on focus", () => {
+            const inputEle = component.find("input");
+
+            inputEle.triggerHandler("focus");
+            expect($scope.mockEvents.focus).toHaveBeenCalled();
         });
 
         it("should trigger correctly on blur", () => {
             const inputEle = component.find("input");
 
             inputEle.triggerHandler("blur");
-            expect($scope.mockBlur).toHaveBeenCalled();
+            expect($scope.mockEvents.blur).toHaveBeenCalled();
         });
 
         it("should trigger correctly on keypress", () => {
             const inputEle = component.find("input");
 
             inputEle.triggerHandler("keypress");
-            expect($scope.mockKeypress).toHaveBeenCalled();
+            expect($scope.mockEvents.keypress).toHaveBeenCalled();
+        });
+
+        it("should trigger correctly on keydown", () => {
+            const inputEle = component.find("input");
+
+            inputEle.triggerHandler("keydown");
+            expect($scope.mockEvents.keydown).toHaveBeenCalled();
+        });
+
+        it("should trigger correctly on keyup", () => {
+            const inputEle = component.find("input");
+
+            inputEle.triggerHandler("keyup");
+            expect($scope.mockEvents.keyup).toHaveBeenCalled();
+        });
+
+        it("should trigger correctly on mouseover", () => {
+            const inputEle = component.find("input");
+
+            inputEle.triggerHandler("mouseover");
+            expect($scope.mockEvents.mouseover).toHaveBeenCalled();
         });
     });
 });
