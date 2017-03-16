@@ -35,6 +35,8 @@ describe("<field type='text'>", function() {
                        title="Title here"
                        placeholder="placeholder"
                        block-class="form"
+                       model="model"
+                       disabled="model === 'hello world'"
                        click="mockEvents.click()"
                        focus="mockEvents.focus()"
                        blur="mockEvents.blur()"
@@ -159,6 +161,34 @@ describe("<field type='text'>", function() {
 
             inputEle.triggerHandler("mouseover");
             expect($scope.mockEvents.mouseover).toHaveBeenCalled();
+        });
+
+        it("should update the model correctly", () => {
+            $scope.model = "hello";
+            $scope.$digest();
+            expect(component.find("input").val()).toBe("hello");
+
+            $scope.model += " world";
+            $scope.$digest();
+            expect(component.find("input").val()).toBe("hello world");
+
+            $scope.model = "1";
+            $scope.$digest();
+            expect(component.find("input").val()).toBe("1");
+        });
+
+        it("should set the disabled attribute when the condition matches", () => {
+            $scope.model = "hello";
+            $scope.$digest();
+            expect(component.find("input")[0].hasAttribute("disabled")).toBe(false);
+
+            $scope.model += " world";
+            $scope.$digest();
+            expect(component.find("input")[0].hasAttribute("disabled")).toBe(true);
+
+            $scope.model = "1";
+            $scope.$digest();
+            expect(component.find("input")[0].hasAttribute("disabled")).toBe(false);
         });
     });
 });
