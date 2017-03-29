@@ -4,10 +4,9 @@
 export default {
     bindings: {
         title: "@",
+        classes: "<",
         placeholder: "@",
         maxlength: "@",
-        blockClass: "@",
-        customClass: "<",
         model: "=?",
         disabled: "<",
         options: "<",
