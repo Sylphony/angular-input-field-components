@@ -1,11 +1,11 @@
 <label class="{{ ::$ctrl.blockClass }}__field {{ ::$ctrl.blockClass }}__field--text" ng-class="{{ $ctrl.customClass.label }}">
-    <span class="{{ ::$ctrl.blockClass }}__field-title" 
-          ng-class="{{ $ctrl.customClass.title }}"
-          data-title="{{ ::$ctrl.title }}">
+    <span class="{{ ::$ctrl.blockClass }}__field-title {{ ::$ctrl.blockClass }}__field-title--text"
+          data-title="{{ ::$ctrl.title }}"
+          ng-class="{{ $ctrl.customClass.title }}">
         {{ ::$ctrl.title }}
     </span>
 
-    <input class="{{ ::$ctrl.blockClass }}__field-input"
+    <input class="{{ ::$ctrl.blockClass }}__field-input {{ ::$ctrl.blockClass }}__field-input--text"
            type="text" 
            placeholder="{{ $ctrl.placeholder }}"
            maxlength="{{ $ctrl.maxlength }}"
