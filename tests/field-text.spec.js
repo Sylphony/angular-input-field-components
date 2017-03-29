@@ -3,7 +3,7 @@ import compileElement from "./util/compileElement";
 /**
  * The input text type test.
  */
-describe("<field type='text'>", function() {
+describe("<field type='text'>", () => {
     let $compile, $scope, component;
 
     beforeEach(angular.mock.module("inputFieldComponents"));
@@ -32,9 +32,9 @@ describe("<field type='text'>", function() {
             angular.element(
                 `
                 <field type="text"
-                       title="Title here"
-                       placeholder="placeholder"
-                       block-class="form"
+                       classes="{ 'label': 'labelClass', 'title': 'titleClass', 'input': 'inputClass' }"
+                       title="Title"
+                       placeholder="Placeholder"
                        model="model"
                        disabled="model === 'hello world'"
                        click="mockEvents.click()"
@@ -70,39 +70,57 @@ describe("<field type='text'>", function() {
         expect(inputEle[0].type).toBe("text");
     });
 
-    describe("<label>", function() {
-        it("should contain all its expected attributes", () => {
-            const labelEle = component.children();
 
+    describe("<label>", () => {
+        let labelEle;
+
+        beforeEach(() => {
+            labelEle = component.children();
+        });
+
+        it("should contain all its expected attributes", () => {
             expect(labelEle[0].hasAttribute("class")).toBe(true);
-            expect(labelEle[0].hasAttribute("ng-class")).toBe(true);
+        });
+
+        it("should have the class, 'labelClass'", () => {
+            expect(labelEle.hasClass("labelClass")).toBe(true);
         });
     });
 
-    describe("<span> title", function() {
-        it("should contain all its expected attributes", () => {
-            const titleEle = component.find("span");
 
+    describe("<span> title", () => {
+        let titleEle;
+
+        beforeEach(() => {
+            titleEle = component.find("span");
+        });
+
+        it("should contain all its expected attributes", () => {
             expect(titleEle[0].hasAttribute("class")).toBe(true);
-            expect(titleEle[0].hasAttribute("ng-class")).toBe(true);
         });
 
-        it("should have the binded title", () => {
-            const titleEle = component.find("span");
+        it("should have the class, 'titleClass'", () => {
+            expect(titleEle.hasClass("titleClass")).toBe(true);
+        });
 
-            expect(titleEle.attr("data-title")).toBe("Title here");
+        it("should have the binded title, 'Title'", () => {
+            expect(titleEle.attr("data-title")).toBe("Title");
         });
     });
 
-    describe("<input type='text'>", function() {
-        it("should contain all its expected attributes", () => {
-            const inputEle = component.find("input");
 
+    describe("<input type='text'>", () => {
+        let inputEle;
+
+        beforeEach(() => {
+            inputEle = component.find("input");
+        });
+
+        it("should contain all its expected attributes", () => {
             expect(inputEle[0].hasAttribute("type")).toBe(true);
             expect(inputEle[0].hasAttribute("class")).toBe(true);
             expect(inputEle[0].hasAttribute("placeholder")).toBe(true);
             expect(inputEle[0].hasAttribute("maxlength")).toBe(true);
-            expect(inputEle[0].hasAttribute("ng-class")).toBe(true);
             expect(inputEle[0].hasAttribute("ng-model")).toBe(true);
             expect(inputEle[0].hasAttribute("ng-click")).toBe(true);
             expect(inputEle[0].hasAttribute("ng-focus")).toBe(true);
@@ -114,51 +132,45 @@ describe("<field type='text'>", function() {
             expect(inputEle[0].hasAttribute("ng-disabled")).toBe(true);
         });
 
-        it("should trigger correctly on click", () => {
-            const inputEle = component.find("input");
+        it("should have the class, 'inputClass'", () => {
+            expect(inputEle.hasClass("inputClass")).toBe(true);
+        });
 
+        it("should have the binded placeholder, 'Placeholder'", () => {
+            expect(inputEle[0].placeholder).toBe("Placeholder");
+        });
+
+        it("should trigger correctly on click", () => {
             inputEle.triggerHandler("click");
             expect($scope.mockEvents.click).toHaveBeenCalled();
         });
 
         it("should trigger correctly on focus", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("focus");
             expect($scope.mockEvents.focus).toHaveBeenCalled();
         });
 
         it("should trigger correctly on blur", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("blur");
             expect($scope.mockEvents.blur).toHaveBeenCalled();
         });
 
         it("should trigger correctly on keypress", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("keypress");
             expect($scope.mockEvents.keypress).toHaveBeenCalled();
         });
 
         it("should trigger correctly on keydown", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("keydown");
             expect($scope.mockEvents.keydown).toHaveBeenCalled();
         });
 
         it("should trigger correctly on keyup", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("keyup");
             expect($scope.mockEvents.keyup).toHaveBeenCalled();
         });
 
         it("should trigger correctly on mouseover", () => {
-            const inputEle = component.find("input");
-
             inputEle.triggerHandler("mouseover");
             expect($scope.mockEvents.mouseover).toHaveBeenCalled();
         });
@@ -166,29 +178,29 @@ describe("<field type='text'>", function() {
         it("should update the model correctly", () => {
             $scope.model = "hello";
             $scope.$digest();
-            expect(component.find("input").val()).toBe("hello");
+            expect(inputEle.val()).toBe("hello");
 
             $scope.model += " world";
             $scope.$digest();
-            expect(component.find("input").val()).toBe("hello world");
+            expect(inputEle.val()).toBe("hello world");
 
             $scope.model = "1";
             $scope.$digest();
-            expect(component.find("input").val()).toBe("1");
+            expect(inputEle.val()).toBe("1");
         });
 
         it("should set the disabled attribute when the condition matches", () => {
             $scope.model = "hello";
             $scope.$digest();
-            expect(component.find("input")[0].hasAttribute("disabled")).toBe(false);
+            expect(inputEle[0].hasAttribute("disabled")).toBe(false);
 
             $scope.model += " world";
             $scope.$digest();
-            expect(component.find("input")[0].hasAttribute("disabled")).toBe(true);
+            expect(inputEle[0].hasAttribute("disabled")).toBe(true);
 
             $scope.model = "1";
             $scope.$digest();
-            expect(component.find("input")[0].hasAttribute("disabled")).toBe(false);
+            expect(inputEle[0].hasAttribute("disabled")).toBe(false);
         });
     });
 });
