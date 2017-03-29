@@ -1,15 +1,13 @@
-<label class="{{ ::$ctrl.blockClass }}__field {{ ::$ctrl.blockClass }}__field--text" ng-class="{{ $ctrl.customClass.label }}">
-    <span class="{{ ::$ctrl.blockClass }}__field-title {{ ::$ctrl.blockClass }}__field-title--text"
-          data-title="{{ ::$ctrl.title }}"
-          ng-class="{{ $ctrl.customClass.title }}">
+<label class="{{ $ctrl.classes.label }}">
+    <span class="{{ $ctrl.classes.title }}"
+          data-title="{{ ::$ctrl.title }}">
         {{ ::$ctrl.title }}
     </span>
 
-    <input class="{{ ::$ctrl.blockClass }}__field-input {{ ::$ctrl.blockClass }}__field-input--text"
+    <input class="{{ $ctrl.classes.input }}"
            type="text" 
-           placeholder="{{ $ctrl.placeholder }}"
+           placeholder="{{ ::$ctrl.placeholder }}"
            maxlength="{{ $ctrl.maxlength }}"
-           ng-class="{{ $ctrl.customClass.input }}"
            ng-model="$ctrl.model" 
            ng-disabled="$ctrl.disabled"
            ng-click="$ctrl.click()"
