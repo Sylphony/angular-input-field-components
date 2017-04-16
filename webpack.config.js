@@ -1,24 +1,25 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
+const path = require("path");
+const merge = require("webpack-merge");
 
-module.exports = {
-    entry: "./src/index.js",
-
-    output: {
-        path: __dirname,
-        filename: "./src/build.js"
-    },
-
-    cache: true,
-    
+// Common configuration
+const commonCfg = {
     module: {
         rules: [
             { 
                 test: /\.js?$/,
-                loader: "babel-loader",
                 exclude: /node_modules/,
-                query: {
-                    presets: ["es2015"]
-                }
+                use: [
+                    {
+                        loader: "transform-loader?brfs"
+                    },
+                    {
+                        loader: "babel-loader",
+                        query: {
+                            presets: ["es2015"]
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -27,8 +28,37 @@ module.exports = {
         extensions: [".js"]
     },
 
+    cache: true,
+
     node: {
         fs: "empty",        // Fixes the node-fs issue
         __dirname: true     // Sets the true directory path
     }
+};
+
+// Build configuration
+const buildCfg = merge(commonCfg, {
+    entry: path.join(__dirname, "src", "field.component"),
+
+    output: {
+        path: path.join(__dirname, "dist"),
+        filename: "./field.component.min.js"
+    }
+});
+
+// Configuration for showcasing examples
+const exampleCfg = merge(commonCfg, {
+    entry: path.join(__dirname, "examples"),
+
+    output: {
+        path: path.join(__dirname, "examples"),
+        filename: "./build.js"
+    }
+});
+
+module.exports = function() {
+    return [
+        buildCfg,
+        exampleCfg
+    ];
 };
