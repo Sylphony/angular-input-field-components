@@ -1,4 +1,8 @@
+import angular from "angular";
+import "angular-mocks";
 import compileElement from "./util/compileElement";
+import field from "./../src/field.component";
+import "./../examples/";
 
 /**
  * The input text type test.
@@ -7,7 +11,6 @@ describe("<field type='text'>", () => {
     let $compile, $scope, component;
 
     beforeEach(angular.mock.module("inputFieldComponents"));
-    beforeEach(angular.mock.module("templates"));
 
     beforeEach(angular.mock.inject(($rootScope, _$compile_) => {
         $scope = $rootScope.$new();
@@ -16,15 +19,15 @@ describe("<field type='text'>", () => {
 
     beforeEach(() => {
         // Create spy mockups to use for events
-        $scope.mockEvents = jasmine.createSpyObj("mockEvents", [
-            "click",
-            "focus",
-            "blur",
-            "keypress",
-            "keydown",
-            "keyup",
-            "mouseover"
-        ]);
+        $scope.mockEvents = {
+            "click": jest.fn(),
+            "focus": jest.fn(),
+            "blur": jest.fn(),
+            "keypress": jest.fn(),
+            "keydown": jest.fn(),
+            "keyup": jest.fn(),
+            "mouseover": jest.fn()
+        };
 
         component = compileElement(
             $compile,

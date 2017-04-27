@@ -1,3 +1,5 @@
+import angular from "angular";
+
 /**
  * Compiles the Angular component to allow it to be used.
  */
