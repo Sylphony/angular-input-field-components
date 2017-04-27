@@ -43,7 +43,15 @@ const buildCfg = merge(commonCfg, {
     output: {
         path: path.join(__dirname, "dist"),
         filename: "./field.component.min.js"
-    }
+    },
+
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: { 
+                warnings: false 
+            }
+        })
+    ]
 });
 
 // Configuration for showcasing examples
