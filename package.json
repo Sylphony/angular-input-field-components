@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "test:single-run": "./node_modules/.bin/karma start --single-run",
     "eslint": "./node_modules/.bin/eslint src/**/*.js",
     "dev-server": "./node_modules/.bin/webpack-dev-server --inline --hot",
     "build": "./node_modules/.bin/webpack"

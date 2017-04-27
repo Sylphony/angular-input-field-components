@@ -7,7 +7,7 @@ notifications:
     email: false
 script:
     - npm run eslint
-    - npm run test:single-run
+    - npm run test
 cache:
     yarn:
         - yarn
