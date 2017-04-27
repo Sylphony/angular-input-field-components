@@ -22,7 +22,7 @@ export default {
         mouseover: "&"
     },
 
-    template: ["$element", "$attrs", function($element, $attrs) {
+    template: ["$element", "$attrs", "$log", function($element, $attrs, $log) {
         switch ($attrs.type) {
             case "text":
                 return fs.readFileSync(__dirname + "/field-text.html", "utf8");
@@ -34,6 +34,6 @@ export default {
                 return fs.readFileSync(__dirname + "/field-dropdown.html", "utf8");
         }
 
-        console.warn("There does not exist a template for the " + $attrs.type + " type."); 
+        $log.warn("There does not exist a template for the " + $attrs.type + " type."); 
     }]
 };
