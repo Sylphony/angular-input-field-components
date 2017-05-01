@@ -1,8 +1,7 @@
 import angular from "angular";
 import "angular-mocks";
 import compileElement from "./util/compileElement";
-import field from "./../src/field.component";
-import "./../examples/";
+import "./module";
 
 /**
  * The input text type test.
@@ -10,12 +9,14 @@ import "./../examples/";
 describe("<field type='text'>", () => {
     let $compile, $scope, component;
 
-    beforeEach(angular.mock.module("inputFieldComponents"));
+    beforeEach(() => {
+        angular.mock.module("inputFieldComponents");
 
-    beforeEach(angular.mock.inject(($rootScope, _$compile_) => {
-        $scope = $rootScope.$new();
-        $compile = _$compile_;
-    }));
+        angular.mock.inject(($rootScope, _$compile_) => {
+            $scope = $rootScope.$new();
+            $compile = _$compile_;
+        });
+    });
 
     beforeEach(() => {
         // Create spy mockups to use for events
