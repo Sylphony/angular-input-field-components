@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="inputFieldComponents">
+    <head>
+        <title>AngularJS Input Field Components</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet/less" type="text/css" href="index.less">
+    </head>
+
+    <body ng-controller="MainCtrl as $ctrl">
+        <div class="container">
+            <header class="header">
+                <h1 class="header__title">AngularJS Input Field Components</h1>
+                <span class="header__subtitle">A simple way of creating form components with AngularJS 1.5+</span>
+            </header>
+
+            <section class="section">
+                <h2 class="section__title">To use</h2>
+
+                <div class="section__inner">
+                    <ol class="install">
+                        <li class="install__step">
+                            Download the file here.
+                        </li>
+                        <li class="install__step">
+                            Include the file in your HTML document after AngularJS has been added, e.g.<br><pre class="install__step-pre"><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js&gt;&lt;/script&gt;<br>&lt;script src="angular-input-field-components.js"&gt;&lt;/script&gt;</code></pre>
+                        </li>
+                        <li class="install__step">
+                            Include it as a dependency within angular.module, e.g.<br><pre class="install__step-pre"><code>angular.module("app", ["inputFieldComponents"])</code></pre>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section__title">Examples</h2>
+
+                <div class="section__inner">
+                    <section class="example">
+                        <h3 class="example__title">Simple instantiation</h3>
+                        <div class="example__row">
+                            <div class="row" code-snippet>
+                                <div class="example__element col-md-6">
+                                    <field type="text"></field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example__row">
+                            <div class="row" code-snippet>
+                                <div class="example__element col-md-6">
+                                    <field type="textarea"></field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example__row">
+                            <div class="row" code-snippet>
+                                <div class="example__element col-md-6">
+                                    <field type="checkbox"></field>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="example">
+                        <h3 class="example__title">Customization</h3>
+                        <div class="example__row">
+                            <div class="row" code-snippet>
+                                <div class="example__element col-md-6">
+                                    <field type="text"
+                                           classes="$ctrl.classes.text"
+                                           title="Textbox Title"
+                                           placeholder="Type in something here"
+                                           model="$ctrl.model.input"
+                                           disabled="$ctrl.model === 'hello world'"
+                                           click="$ctrl.eventFire('click')"
+                                           focus="$ctrl.eventFire('focus')"
+                                           blur="$ctrl.eventFire('blur')"
+                                           keypress="$ctrl.eventFire('keypress')"
+                                           keydown="$ctrl.eventFire('keydown')"
+                                           keyup="$ctrl.eventFire('keyup')"
+                                           mouseover="$ctrl.eventFire('mouseover')">
+                                    </field>
+                                    <div class="example__output">{{ $ctrl.model.input }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
+        <script src="build.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-javascript.js"></script>
+    </body>
+</html>
