@@ -9,12 +9,12 @@
               maxlength="{{ $ctrl.maxlength }}"
               ng-model="$ctrl.model" 
               ng-disabled="$ctrl.disabled"
-              ng-click="$ctrl.click()"
-              ng-focus="$ctrl.focus()"
-              ng-blur="$ctrl.blur()"
-              ng-keypress="$ctrl.keypress()"
-              ng-keydown="$ctrl.keydown()"
-              ng-keyup="$ctrl.keyup()"
-              ng-mouseover="$ctrl.mouseover()">
+              ng-click="$ctrl.click({ $event: $event })"
+              ng-focus="$ctrl.focus({ $event: $event })"
+              ng-blur="$ctrl.blur({ $event: $event })"
+              ng-keypress="$ctrl.keypress({ $event: $event })"
+              ng-keydown="$ctrl.keydown({ $event: $event })"
+              ng-keyup="$ctrl.keyup({ $event: $event })"
+              ng-mouseover="$ctrl.mouseover({ $event: $event })">
     </textarea>
 </label>
