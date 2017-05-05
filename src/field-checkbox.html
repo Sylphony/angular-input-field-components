@@ -1,16 +1,13 @@
-<label class="{{ $ctrl.classes.label }}">
-    <input class="{{ $ctrl.classes.input }}"
-           type="checkbox" 
-           placeholder="{{ ::$ctrl.placeholder }}"
-           ng-model="$ctrl.model" 
-           ng-disabled="$ctrl.disabled"
-           ng-click="$ctrl.click({ $event: $event })"
-           ng-focus="$ctrl.focus({ $event: $event })"
-           ng-blur="$ctrl.blur({ $event: $event })"
-           ng-mouseover="$ctrl.mouseover({ $event: $event })">
+<input id="{{ ::$ctrl.refId }}"
+       class="{{ $ctrl.classes.input }}"
+       type="checkbox" 
+       name="{{ ::$ctrl.name }}"
+       placeholder="{{ ::$ctrl.placeholder }}"
+       ng-model="$ctrl.model" 
+       ng-disabled="$ctrl.disabled"
+       ng-click="$ctrl.click({ $event: $event })"
+       ng-focus="$ctrl.focus({ $event: $event })"
+       ng-blur="$ctrl.blur({ $event: $event })"
+       ng-mouseover="$ctrl.mouseover({ $event: $event })">
 
-    <span class="{{ $ctrl.classes.title }}"
-          data-title="{{ ::$ctrl.title }}">
-        {{ ::$ctrl.title }}
-    </span> 
-</label>
+<label class="{{ $ctrl.classes.label }}" for="{{ ::$ctrl.refId }}">{{ $ctrl.label }}</label>

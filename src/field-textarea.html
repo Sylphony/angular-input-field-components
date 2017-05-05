@@ -1,20 +1,18 @@
-<label class="{{ $ctrl.classes.label }}">
-    <span class="{{ $ctrl.classes.title }}"
-          data-title="{{ ::$ctrl.title }}">
-        {{ ::$ctrl.title }}
-    </span>
+<label class="{{ $ctrl.classes.label }}" for="{{ ::$ctrl.refId }}">{{ ::$ctrl.label }}</label>
 
-    <textarea class="{{ $ctrl.classes.input }}"
-              placeholder="{{ ::$ctrl.placeholder }}"
-              maxlength="{{ $ctrl.maxlength }}"
-              ng-model="$ctrl.model" 
-              ng-disabled="$ctrl.disabled"
-              ng-click="$ctrl.click({ $event: $event })"
-              ng-focus="$ctrl.focus({ $event: $event })"
-              ng-blur="$ctrl.blur({ $event: $event })"
-              ng-keypress="$ctrl.keypress({ $event: $event })"
-              ng-keydown="$ctrl.keydown({ $event: $event })"
-              ng-keyup="$ctrl.keyup({ $event: $event })"
-              ng-mouseover="$ctrl.mouseover({ $event: $event })">
-    </textarea>
-</label>
+<textarea id="{{ ::$ctrl.refId }}"
+          class="{{ $ctrl.classes.input }}"
+          name="{{ ::$ctrl.name }}"
+          type="text" 
+          placeholder="{{ ::$ctrl.placeholder }}"
+          maxlength="{{ ::$ctrl.maxlength }}"
+          ng-model="$ctrl.model" 
+          ng-disabled="$ctrl.disabled"
+          ng-click="$ctrl.click({ $event: $event })"
+          ng-focus="$ctrl.focus({ $event: $event })"
+          ng-blur="$ctrl.blur({ $event: $event })"
+          ng-keypress="$ctrl.keypress({ $event: $event })"
+          ng-keydown="$ctrl.keydown({ $event: $event })"
+          ng-keyup="$ctrl.keyup({ $event: $event })"
+          ng-mouseover="$ctrl.mouseover({ $event: $event })">
+</textarea>

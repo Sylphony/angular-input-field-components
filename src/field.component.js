@@ -5,8 +5,10 @@ const fs = require("fs");
  */
 export default {
     bindings: {
-        title: "@",
+        refId: "@",
         classes: "<",
+        name: "@",
+        label: "@",
         placeholder: "@",
         maxlength: "@",
         model: "=?",
