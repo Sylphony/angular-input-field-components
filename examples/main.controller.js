@@ -13,12 +13,17 @@ class MainCtrl {
         };
 
         this.classes = {
-            text: Object.assign({}, fieldClassesBase, {
+            text: Object.assign(fieldClassesBase, {
                 label: fieldClassesBase.label += " field__label--text",
                 title: fieldClassesBase.title += " field__title--text",
                 input: fieldClassesBase.input += " field__input--text",
             }),
+        };
 
+        this.events = {
+            click: function(b, $event) {
+                console.log(b, $event);
+            }
         };
     }
 }

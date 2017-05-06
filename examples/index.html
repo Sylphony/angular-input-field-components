@@ -10,24 +10,77 @@
         <div class="container">
             <header class="header">
                 <h1 class="header__title">AngularJS Input Field Components</h1>
-                <span class="header__subtitle">A simple way of creating form components with AngularJS 1.5+</span>
+                <span class="header__subtitle">A simple way of creating common form components with AngularJS 1.5+</span>
             </header>
 
-            <section class="section">
-                <h2 class="section__title">To use</h2>
+            <section class="section install">
+                <h2 class="section__title">Setup</h2>
 
                 <div class="section__inner">
-                    <ol class="install">
+                    <ol class="install__steps">
                         <li class="install__step">
                             Download the file here.
                         </li>
                         <li class="install__step">
-                            Include the file in your HTML document after AngularJS has been added, e.g.<br><pre class="install__step-pre"><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js&gt;&lt;/script&gt;<br>&lt;script src="angular-input-field-components.js"&gt;&lt;/script&gt;</code></pre>
+                            Include the file in your HTML document after AngularJS (1.5+) has been added, e.g.<br><pre class="install__step-pre"><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js&gt;&lt;/script&gt;<br>&lt;script src="angular-input-field-components.js"&gt;&lt;/script&gt;</code></pre>
                         </li>
                         <li class="install__step">
                             Include it as a dependency within angular.module, e.g.<br><pre class="install__step-pre"><code>angular.module("app", ["inputFieldComponents"])</code></pre>
                         </li>
                     </ol>
+                </div>
+            </section>
+
+            <section class="section elements">
+                <h2 class="section__title">Form fields</h2>
+
+                <div class="section__inner">
+                    <p class="elements__desc">This module can currently create the following form field types:</p>
+
+                    <ul class="elements__list">
+                        <li>Textbox</li>
+                        <li>Textarea</li>
+                        <li>Checkbox</li>
+                    </ul>
+
+                    <div class="elements__form">
+                        <p class="elements__desc">The component that creates these fields is <code>&lt;field&gt;</code>.  Within the <code>&lt;field&gt;</code> is a label element and a corresponding input element.  The <code>type</code> attribute determines what field type to set.  See the <a href="#customization">Customization</a> section below for more details.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="customization" class="section customization">
+                <h2 class="section__title">Customization</h2>
+
+                <div class="section__inner">
+                    <p class="customization__desc">Attributes can be placed on the <code>&lt;field&gt;</code> component to customize it.  The following is a list of these attributes.</p>
+
+                    <section class="customization__info">
+                        <h4><code>type</code></h4>
+                        <p class="customization__detail"><span class="customization__detail-label">Input type:</span> String</p>
+                        <p class="customization__detail customization__detail--desc">This determines what form field element to create.  Possible values are <code>text</code>, <code>textarea</code>, <code>checkbox</code>.  If the value passed is not one of the ones specified, nothing is rendered and a warning will appear in the console.</p>
+                    </section>
+
+                    <section class="customization__info">
+                        <h4><code>label</code></h4>
+                        <p class="customization__detail"><span class="customization__detail-label">Input type:</span> String</p>
+                        <p class="customization__detail"><span class="customization__detail-label">Field types supported:</span> Textbox, Textarea, Checkbox</p>
+                        <p class="customization__detail customization__detail--desc">This sets a label for the element.</p>
+                    </section>
+
+                    <section class="customization__info">
+                        <h4><code>ref-id</code></h4>
+                        <p class="customization__detail"><span class="customization__detail-label">Input type:</span> String</p>
+                        <p class="customization__detail"><span class="customization__detail-label">Field types supported:</span> Textbox, Textarea, Checkbox</p>
+                        <p class="customization__detail customization__detail--desc">This assigns an <code>id</code> value to the input element.  The value is also set on the <code>for</code> attribute on the label element to link them together.</p>
+                    </section>
+
+                    <section class="customization__info">
+                        <h4><code>classes</code></h4>
+                        <p class="customization__detail"><span class="customization__detail-label">Input type:</span> Object</p>
+                        <p class="customization__detail"><span class="customization__detail-label">Field types supported:</span> Textbox, Textarea, Checkbox</p>
+                        <p class="customization__detail customization__detail--desc">This allows <code>class</code> to be set on the input element, label element or both.  The property names of the object passed to set the label and input are <code>label</code> and <code>input</code> respectively.</p>
+                    </section>
                 </div>
             </section>
 
@@ -65,13 +118,15 @@
                         <div class="example__row">
                             <div class="row" code-snippet>
                                 <div class="example__element col-md-6">
-                                    <field type="text"
+                                    <field ref-id="name"
+                                           type="text"
+                                           name="name"
                                            classes="$ctrl.classes.text"
-                                           title="Textbox Title"
+                                           label="Textbox Title"
                                            placeholder="Type in something here"
                                            model="$ctrl.model.input"
                                            disabled="$ctrl.model === 'hello world'"
-                                           click="$ctrl.eventFire('click')"
+                                           click="$ctrl.events.click('click', $event)"
                                            focus="$ctrl.eventFire('focus')"
                                            blur="$ctrl.eventFire('blur')"
                                            keypress="$ctrl.eventFire('keypress')"
@@ -90,8 +145,5 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
         <script src="build.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-javascript.js"></script>
     </body>
 </html>
