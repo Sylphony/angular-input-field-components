@@ -19,7 +19,7 @@ describe("<field type='text'>", () => {
     });
 
     beforeEach(() => {
-        // Create spy mockups to use for events
+        // Create event mocks
         $scope.mockEvents = {
             "click": jest.fn(),
             "focus": jest.fn(),
@@ -36,8 +36,10 @@ describe("<field type='text'>", () => {
             angular.element(
                 `
                 <field type="text"
-                       classes="{ 'label': 'labelClass', 'title': 'titleClass', 'input': 'inputClass' }"
-                       title="Title"
+                       ref-id="name"
+                       classes="{ 'label': 'labelClass', 'input': 'inputClass' }"
+                       name="name"
+                       label="Name"
                        placeholder="Placeholder"
                        model="model"
                        disabled="model === 'hello world'"
@@ -54,17 +56,12 @@ describe("<field type='text'>", () => {
         );
     });
 
-    it("should contain only one child element and it is <label>", () => {
-        const labelEle = component.children();
-
-        expect(labelEle.length).toBe(1);
-        expect(labelEle[0].nodeName).toBe("LABEL");
+    it("should have two children only", () => {
+        expect(component.children().length).toBe(2);
     });
 
-    it("should contain only one element for title and it is <span>", () => {
-        const titleEle = component.find("span");
-
-        expect(titleEle.length).toBe(1);
+    it("should contain only one <label> child", () => {
+        expect(component.find("label").length).toBe(1);
     });
 
     it("should contain only one input element and it is <input type='text'>", () => {
@@ -84,31 +81,19 @@ describe("<field type='text'>", () => {
 
         it("should contain all its expected attributes", () => {
             expect(labelEle[0].hasAttribute("class")).toBe(true);
+            expect(labelEle[0].hasAttribute("for")).toBe(true);
+        });
+
+        it("should have the binded label, 'Name'", () => {
+            expect(labelEle.text()).toBe("Name");
+        });
+
+        it("should have the reference id, 'name'", () => {
+            expect(labelEle.attr("for")).toBe("name");
         });
 
         it("should have the class, 'labelClass'", () => {
             expect(labelEle.hasClass("labelClass")).toBe(true);
-        });
-    });
-
-
-    describe("<span> title", () => {
-        let titleEle;
-
-        beforeEach(() => {
-            titleEle = component.find("span");
-        });
-
-        it("should contain all its expected attributes", () => {
-            expect(titleEle[0].hasAttribute("class")).toBe(true);
-        });
-
-        it("should have the class, 'titleClass'", () => {
-            expect(titleEle.hasClass("titleClass")).toBe(true);
-        });
-
-        it("should have the binded title, 'Title'", () => {
-            expect(titleEle.attr("data-title")).toBe("Title");
         });
     });
 
@@ -122,7 +107,9 @@ describe("<field type='text'>", () => {
 
         it("should contain all its expected attributes", () => {
             expect(inputEle[0].hasAttribute("type")).toBe(true);
+            expect(inputEle[0].hasAttribute("id")).toBe(true);
             expect(inputEle[0].hasAttribute("class")).toBe(true);
+            expect(inputEle[0].hasAttribute("name")).toBe(true);
             expect(inputEle[0].hasAttribute("placeholder")).toBe(true);
             expect(inputEle[0].hasAttribute("maxlength")).toBe(true);
             expect(inputEle[0].hasAttribute("ng-model")).toBe(true);
@@ -136,8 +123,16 @@ describe("<field type='text'>", () => {
             expect(inputEle[0].hasAttribute("ng-disabled")).toBe(true);
         });
 
+        it("should have the id, 'name'", () => {
+            expect(inputEle[0].id).toBe("name");
+        });
+
         it("should have the class, 'inputClass'", () => {
             expect(inputEle.hasClass("inputClass")).toBe(true);
+        });
+
+        it("should have the name of input be 'name'", () => {
+            expect(inputEle[0].name).toBe("name");
         });
 
         it("should have the binded placeholder, 'Placeholder'", () => {
